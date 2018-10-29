@@ -8,9 +8,9 @@ import TodoList from './components/TodoList';
 const App = () => {
 
   const todoDate = [
-    {label: 'Drink Coffee', important:false},
-    {label: 'Make Awesome App', important:true},
-    {label: 'Have a lunch', important:false}
+    {label: 'Drink Coffee', important:false, id: 1},
+    {label: 'Make Awesome App', important:true, id: 2},
+    {label: 'Have a lunch', important:false, id: 3}
   ];
   const isLoggedIn = false;
   const loginBox = <span>Login in please</span>;

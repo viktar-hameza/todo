@@ -12,11 +12,19 @@ export default class App extends Component {
   maxId = 100;
   state = {
     todoData: [
-      { label: 'Drink Coffee', important: false, id: 1 },
-      { label: 'Make Awesome App', important: true, id: 2 },
-      { label: 'Have a lunch', important: false, id: 3 }
+      this.createTodoItem('Drink Coffee'),
+      this.createTodoItem('Make Awesome App'),
+      this.createTodoItem('Have a lunch')
     ]
   };
+  createTodoItem(label) {
+    return {
+      label,
+      important: false,
+      done: false,
+      id: this.maxId++
+    }
+  }
   deleteItem = (id) => {
     this.setState(({ todoData })  => {
       const idx = todoData.findIndex((el) => el.id === id );
@@ -32,11 +40,7 @@ export default class App extends Component {
   };
 
   addItem = (text) => {
-    const newItem = {
-      label: text,
-      important: false,
-      id: this.maxId++
-    }
+    const newItem = this.createTodoItem(text);
     this.setState(({ todoData }) => {
       const newArr = [...todoData, newItem];
       return {
@@ -44,7 +48,12 @@ export default class App extends Component {
       }
     });
   };
-
+  onToggleImportant = (id) => {
+    console.log('Toggle Important', id);
+  };
+  onToggleDone = (id) => {
+    console.log('Toggle Done', id);
+  }
   render() {
     return (
       <div className="todo-app">
@@ -55,7 +64,9 @@ export default class App extends Component {
         </div>
         <TodoList
           todos={this.state.todoData}
-          onDeleted={this.deleteItem} />
+          onDeleted={this.deleteItem} 
+          onToggleImportant={this.onToggleImportant}
+          onToggleDone={this.onToggleDone}/>
         <AddItemForm
           onAddItem={this.addItem}/>
       </div>

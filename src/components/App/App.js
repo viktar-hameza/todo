@@ -52,8 +52,12 @@ export default class App extends Component {
     console.log('Toggle Important', id);
   };
   onToggleDone = (id) => {
+    this.setState((todoData) => {
+      const idx = todoData.findIndex((el) => el.id === id);
+      const oldItem = todoData[idx];
+    });
     console.log('Toggle Done', id);
-  }
+  };
   render() {
     return (
       <div className="todo-app">
